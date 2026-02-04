@@ -50,17 +50,23 @@ describe('useUserSearch', () => {
 
     // Mock window.location
     delete (window as { location?: Location }).location;
-    window.location = {
-      ...originalLocation,
-      search: '',
-      href: 'http://localhost:3000/',
-    } as Location;
+    Object.defineProperty(window, 'location', {
+      value: {
+        ...originalLocation,
+        search: '',
+        href: 'http://localhost:3000/',
+      },
+      writable: true,
+    });
 
     // Mock window.history
-    window.history = {
-      ...originalHistory,
-      replaceState: vi.fn(),
-    } as History;
+    Object.defineProperty(window, 'history', {
+      value: {
+        ...originalHistory,
+        replaceState: vi.fn(),
+      },
+      writable: true,
+    });
 
     // Reset any side effects
     vi.clearAllTimers();
@@ -68,8 +74,14 @@ describe('useUserSearch', () => {
 
   afterEach(() => {
     // Restore original values
-    window.location = originalLocation;
-    window.history = originalHistory;
+    Object.defineProperty(window, 'location', {
+      value: originalLocation,
+      writable: true,
+    });
+    Object.defineProperty(window, 'history', {
+      value: originalHistory,
+      writable: true,
+    });
     vi.clearAllMocks();
   });
 
@@ -250,11 +262,14 @@ describe('useUserSearch', () => {
   describe('initialization from URL', () => {
     it('should initialize with search term from URL', () => {
       // Mock location with search param
-      window.location = {
-        ...originalLocation,
-        search: '?search=alice',
-        href: 'http://localhost:3000/?search=alice',
-      } as Location;
+      Object.defineProperty(window, 'location', {
+        value: {
+          ...originalLocation,
+          search: '?search=alice',
+          href: 'http://localhost:3000/?search=alice',
+        },
+        writable: true,
+      });
 
       const { result } = renderHook(() => useUserSearch(mockUsers));
 
@@ -264,11 +279,14 @@ describe('useUserSearch', () => {
 
     it('should handle encoded URL parameters', () => {
       // Mock location with encoded search param
-      window.location = {
-        ...originalLocation,
-        search: '?search=john%20doe',
-        href: 'http://localhost:3000/?search=john%20doe',
-      } as Location;
+      Object.defineProperty(window, 'location', {
+        value: {
+          ...originalLocation,
+          search: '?search=john%20doe',
+          href: 'http://localhost:3000/?search=john%20doe',
+        },
+        writable: true,
+      });
 
       const { result } = renderHook(() => useUserSearch(mockUsers));
 
