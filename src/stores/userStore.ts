@@ -41,7 +41,6 @@ export const useUserStore = create<UserState>((set) => ({
   clearSelection: () => set({ selectedUsers: [] }),
 }));
 
-// BUG: This selector creates a new object each render, causing stale closures
 // NOTE: This hook is intentionally buggy for testing purposes
 export const useUserMetrics = () => {
   // Commented out the buggy implementation to allow compilation

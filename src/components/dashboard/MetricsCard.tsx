@@ -12,7 +12,6 @@ export const MetricsCard = ({ title, value, color, subtitle }: MetricsCardProps)
   const [displayValue, setDisplayValue] = useState(0);
   const [animationKey, setAnimationKey] = useState(0);
   
-  // BUG: Missing 'value' in dependency array - causes stale data
   useEffect(() => {
     // Animate the number change
     const timer = setTimeout(() => {
@@ -21,7 +20,7 @@ export const MetricsCard = ({ title, value, color, subtitle }: MetricsCardProps)
     }, 100);
     
     return () => clearTimeout(timer);
-  }, []); // Missing 'value' dependency - this is the bug!
+  }, []);
   
   const colorClasses = {
     blue: 'bg-blue-50 border-blue-200 text-blue-800',

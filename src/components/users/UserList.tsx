@@ -62,7 +62,7 @@ export const UserList = () => {
       )}
       
       <div className="space-y-4">
-        {/* BUG: Using array index as key instead of user.id */}
+        
         {users.map((user, index) => (
           <UserCard key={index} user={user} />
         ))}

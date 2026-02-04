@@ -1,5 +1,5 @@
 export const UserSearch = () => {
-  // MEDIUM BUG: This component is intentionally left as a stub
+  // TODO: Implement search functionality
   // This will be reported as a missing feature in testing
   
   return (

@@ -21,7 +21,6 @@ export const useAddUser = () => {
   return useMutation({
     mutationFn: mockApi.addUser,
     onSuccess: () => {
-      // BUG: We invalidate users cache but not metrics cache
       queryClient.invalidateQueries({ queryKey: ['users'] });
       // Missing: queryClient.invalidateQueries({ queryKey: ['metrics'] });
     },
@@ -34,7 +33,6 @@ export const useDeleteUser = () => {
   return useMutation({
     mutationFn: mockApi.deleteUser,
     onSuccess: () => {
-      // BUG: We invalidate users cache but not metrics cache
       queryClient.invalidateQueries({ queryKey: ['users'] });
       // Missing: queryClient.invalidateQueries({ queryKey: ['metrics'] });
     },
