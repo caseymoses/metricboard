@@ -20,7 +20,7 @@ export const MetricsCard = ({ title, value, color, subtitle }: MetricsCardProps)
     }, 100);
     
     return () => clearTimeout(timer);
-  }, []);
+  }, [value]);
   
   const colorClasses = {
     blue: 'bg-blue-50 border-blue-200 text-blue-800',
