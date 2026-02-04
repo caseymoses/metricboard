@@ -49,7 +49,6 @@ describe('useUserSearch', () => {
     originalHistory = window.history;
 
     // Mock window.location
-    delete (window as { location?: Location }).location;
     Object.defineProperty(window, 'location', {
       value: {
         ...originalLocation,
@@ -57,6 +56,7 @@ describe('useUserSearch', () => {
         href: 'http://localhost:3000/',
       },
       writable: true,
+      configurable: true,
     });
 
     // Mock window.history
@@ -66,6 +66,7 @@ describe('useUserSearch', () => {
         replaceState: vi.fn(),
       },
       writable: true,
+      configurable: true,
     });
 
     // Reset any side effects
@@ -77,10 +78,12 @@ describe('useUserSearch', () => {
     Object.defineProperty(window, 'location', {
       value: originalLocation,
       writable: true,
+      configurable: true,
     });
     Object.defineProperty(window, 'history', {
       value: originalHistory,
       writable: true,
+      configurable: true,
     });
     vi.clearAllMocks();
   });
@@ -269,6 +272,7 @@ describe('useUserSearch', () => {
           href: 'http://localhost:3000/?search=alice',
         },
         writable: true,
+        configurable: true,
       });
 
       const { result } = renderHook(() => useUserSearch(mockUsers));
@@ -286,6 +290,7 @@ describe('useUserSearch', () => {
           href: 'http://localhost:3000/?search=john%20doe',
         },
         writable: true,
+        configurable: true,
       });
 
       const { result } = renderHook(() => useUserSearch(mockUsers));
