@@ -78,8 +78,8 @@ export const UserList = ({ filteredUsers }: UserListProps) => {
       )}
       
       <div className="space-y-4">
-        {displayUsers.map((user, index) => (
-          <UserCard key={index} user={user} />
+        {displayUsers.map((user) => (
+          <UserCard key={user.id} user={user} />
         ))}
       </div>
     </div>
