@@ -22,7 +22,7 @@ export const useAddUser = () => {
     mutationFn: mockApi.addUser,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['users'] });
-      
+      queryClient.invalidateQueries({ queryKey: ['metrics'] });
     },
   });
 };
@@ -34,7 +34,7 @@ export const useDeleteUser = () => {
     mutationFn: mockApi.deleteUser,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['users'] });
-      
+      queryClient.invalidateQueries({ queryKey: ['metrics'] });
     },
   });
 };
